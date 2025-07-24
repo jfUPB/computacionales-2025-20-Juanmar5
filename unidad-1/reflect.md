@@ -36,3 +36,20 @@ D=1
 - D=M toma el valor de la memoria RAM y se lo da al registro D, M=D Toma el valor del registro D y se lo almacena a la memoria RAM
 Describe brevemente qué se necesita para leer un valor del teclado (KBD) y para “pintar” un pixel en la pantalla (SCREEN).
 - Realizar un loop donde se verifique que @KBD sea distinto de cero al tomar el valor de la tecla presionada, después se ejecuta la instrucción en un bucle para rellenar toda la pantalla
+
+
+### Actividad 06
+
+
+### Actividad 07
+
+Continuar: ¿Qué aspecto de las actividades, las explicaciones o la dinámica de la clase te ha resultado más útil o te ha gustado más y debería seguir haciendo?
+- Me encantaría que el paso a paso del set-seek se siga haciendo así como los espacios para preguntar acerca de lo que está ocurriendo dentro del código
+Dejar de hacer: ¿Qué aspecto de la unidad te ha resultado confuso, poco útil o frustrante? ¿Hay algo que crees que debería eliminar o cambiar drásticamente?
+- No hay algo que realmente quitaría, excepto que me pasó que durante la explicación del segundo ejercicio se me cerró el branch del set-seek en esa misma clase entonces fue como si lo que vi en esa clase no me hubiera servido para las notas
+Empezar a hacer: ¿Qué te habría gustado que hiciéramos que no hicimos? ¿Tienes alguna idea para una actividad o un recurso que podría mejorar el aprendizaje en la próxima unidad?
+- Me gustaría que hubieran más avisos o quizá hasta un pequeño espacio para completar el apply, así como dar espacios ligeros para preguntas de la actividad
+Ritmo y Dificultad: en una escala del 1 (muy fácil/lento) al 5 (muy difícil/rápido), ¿Cómo calificarías el ritmo y la dificultad general de esta unidad? ¿Por qué?
+- Yo creo que un 4.5, estuvo bastante bien y entendí mucho pero tuve problemas entendiendo cuándo era la fecha de entrega del apply
+Comentario Adicional: ¿Hay algo más que te gustaría compartir sobre tu experiencia de aprendizaje en esta unidad?
+- No realmente, estuvo muy buena y muchísimo mejor que la forma autónoma del año pasado, una gran mejora
