@@ -26,7 +26,7 @@ uint16_t memory[32768];
 
 int main() {
     memory[SCREEN] = 1;
-    cout << "Pixel (0,0) encendido: " << memory[SCREEN] << endl;
+    cout << "a: " << memory[SCREEN] << endl;
     return 0;
 }
 
@@ -57,7 +57,7 @@ uint16_t memory[32768];
 
 int main() {
     memory[SCREEN] = 0xFFFF;
-    cout << "Word en SCREEN: ";
+    cout << "SCREEN: ";
     for (int i = 15; i >= 0; --i) {
         cout << ((memory[SCREEN] >> i) & 1);
     } cout << endl;
@@ -66,3 +66,44 @@ int main() {
 ```
 
 
+### Actividad 3
+
+##### Programa C++
+
+``` c++
+#include <iostream>
+#include <cstdint>
+using namespace std;
+
+const int SCREEN = 16384;
+uint16_t memory[32768];
+
+int main() {
+    uint16_t line = 0xFFFF;
+
+    char tecla;
+    while (true) {
+        memory[SCREEN] = line;
+
+        cout << "SCREEN";
+        for (int i = 15; i >= 0; --i)
+            cout << ((line >> i) & 1);
+        cout << endl;
+
+        cout << "q pa salir: ";
+        cin >> tecla;
+
+        if (tecla == 'd') {
+            line <<= 1;
+        } else if (tecla == 'i') {
+            line >>= 1;
+        } else if (tecla == 'q') {
+            break;
+        }
+
+        cout << "---------------------------" << endl;
+    }
+
+    return 0;
+}
+```
