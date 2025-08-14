@@ -72,3 +72,45 @@ Dentro de swapPorPuntero: a = 10, b = 20
 Despu├®s de swapPorPuntero: x = 10, y = 20
 ```
 Desconozco por qué la 'é' salió así
+
+### Actividad 3 (temporal, no final)
+##### Mapa de memoria
++----------------------------+
+| Segmento de código (Text) |
+|----------------------------|
+| Funciones:                |
+|  - main()                 |
+|  - suma()                 |
+|  - funcionConStatic()     |
+|  - crearArrayHeap()       |
++----------------------------+
+
+| Variables globales y estáticas |
+|-------------------------------|
+| global_inicializada = 42     |
+| global_no_inicializada       |
+| mensaje_ro (puntero constante a char) |
+| var_estatica (dentro de funcionConStatic) |
++-------------------------------+
+
+| Heap (asignación dinámica)   |
+|-------------------------------|
+| arrayHeap → apunta a bloque  |
+| de 10 enteros creados con     |
+| new int[tam]                 |
++-------------------------------+
+
+| Stack (pila)                 |
+|-------------------------------|
+| Variables locales de main(): |
+|  - a, b, c                   |
+| Variables locales de suma(): |
+|  - c                         |
+| Parámetros pasados por valor |
+|  - a, b (en suma)            |
++-------------------------------+
+
+| Segmento de solo lectura     |
+|-------------------------------|
+| "Hola, memoria de solo lectura" |
++-------------------------------+
