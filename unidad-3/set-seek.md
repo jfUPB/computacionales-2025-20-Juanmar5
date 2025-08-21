@@ -73,7 +73,9 @@ Despu├®s de swapPorPuntero: x = 10, y = 20
 ```
 Desconozco por qué la 'é' salió así
 
-### Actividad 3
+
+### Actividad 3 (temporal, no final)
+
 ##### Mapa de memoria
 +----------------------------+
 | Segmento de código (Text) |
@@ -114,6 +116,7 @@ Desconozco por qué la 'é' salió así
 |-------------------------------|
 | "Hola, memoria de solo lectura" |
 +-------------------------------+
+
 
 
 ### Actividad 04
@@ -169,3 +172,4 @@ Desconozco por qué la 'é' salió así
 ¿Por qué usar delete[] para arreglos?
 - Porque new[] reserva memoria para varios elementos consecutivos y delete[] libera correctamente todo el bloque.
 - Usar solo delete en un arreglo produce comportamiento indefinido.
+
