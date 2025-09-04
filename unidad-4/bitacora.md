@@ -186,6 +186,11 @@ int main() {
 
 ## Demostración:
 
+Tenías esto:
+
 [Aquí está el video demostrativo de mi aplicación]([url del video no listado en youtube](https://youtu.be/vAlmbpqwiv8)
 
+Te lo modifiqué así para que el hipervínculo quedara bien:
+
+[Aquí está el video demostrativo de mi aplicación](https://youtu.be/vAlmbpqwiv8)
 
