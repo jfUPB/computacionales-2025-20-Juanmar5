@@ -73,7 +73,9 @@ Despu├®s de swapPorPuntero: x = 10, y = 20
 ```
 Desconozco por qué la 'é' salió así
 
+
 ### Actividad 3 (temporal, no final)
+
 ##### Mapa de memoria
 +----------------------------+
 | Segmento de código (Text) |
@@ -114,3 +116,60 @@ Desconozco por qué la 'é' salió así
 |-------------------------------|
 | "Hola, memoria de solo lectura" |
 +-------------------------------+
+
+
+
+### Actividad 04
+##### Experimento 1:
+
+¿Qué pasa?
+- Intentar escribir allí provoca una excepción.
+
+##### Experimento 2: 
+
+¿Qué pasa?
+- También da error, los literales de cadena están en el segmento de solo lectura.
+
+##### Experimento 3
+
+¿Qué pasa?
+- Funciona, los valores de las variables cambian y se imprimen actualizados. Se guardan en el segmento de datos, el cual es de lectura y escritura.
+
+##### Experimento 4:
+
+¿Qué pasa?
+- No compila, var_estatica no es visible fuera de la función, tiene ámbito local
+
+¿Qué pasa con las variables cada que entras y sales de la función?
+- Las variables locales normales se crean y destruyen cada vez que entras/sales de la función.
+- Las variables estáticas locales se crean solo una vez y mantienen su valor entre llamadas.
+
+##### Experimento 5:
+
+¿Qué pasa?
+- var_no_estatica siempre vale 100 porque se crea de nuevo en cada llamada.
+- var_estatica empieza en 100 y va aumentando con cada llamada (101, 102, 103...).
+
+¿Por qué?
+- Una variable local sin static se almacena en el stack y desaparece al salir de la función.
+- Una variable local con static se almacena en el segmento de globales/estáticas y conserva su valor.
+
+##### Experimento 6
+
+¿Qué pasa?
+- Se produce comportamiento indefinido: puede imprimir basura, un número aleatorio o causar error.
+- Acceder a memoria liberada es un dangling pointer
+
+##### Preguntas
+
+¿Diferencias entre Heap y Stack?
+- Stack: automático, rápido, limitado en tamaño, variables se crean y destruyen al entrar/salir de funciones.
+- Heap: manual, más flexible, se mantiene hasta que se libere con delete, pero más lento y propenso a errores.
+
+¿Consecuencias de no liberar memoria con delete?
+- Se produce una fuga de memoria (memory leak). El sistema no recupera esa memoria hasta que el programa termine.
+
+¿Por qué usar delete[] para arreglos?
+- Porque new[] reserva memoria para varios elementos consecutivos y delete[] libera correctamente todo el bloque.
+- Usar solo delete en un arreglo produce comportamiento indefinido.
+
