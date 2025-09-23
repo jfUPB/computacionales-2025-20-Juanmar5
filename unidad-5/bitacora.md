@@ -2,6 +2,7 @@
 
 ## 1.  **Diagnóstico inicial**
 - Estoy medio olvidado y perdido con todos los temas de POO
+- Creo que voy mejorando con los temas pero me confundo aún, igual, identifico mejor el polimorfismo y la encapsulación, me cuesta menos distinguirla
 
 ## 2.  **La pregunta inicial**
 - ¿Cómo podré recordar los conceptos de herencia y polimorfismo para volverlos a aplicar al nuevo contexto?
@@ -9,6 +10,8 @@
 ## 3.  **Registro de exploración:** 
 - Aquí documentas cada ciclo de pregunta -> hipótesis -> experimento -> hallazgo -> reflexión.
 - Debe ser rico en evidencia visual (código, capturas del depurador con anotaciones, diagramas).
+
+# Actividad 1
 
 ## Parte 1: recordando los conceptos (en C#)
 
@@ -123,3 +126,113 @@ Polimorfismo: razoné que hay algún mecanismo interno (tipo tabla de funciones)
 
 Primera pregunta para iniciar mi ruta personal:
 - ¿Cómo se ve en la memoria un objeto con herencia en C#?
+
+# Actividad 2
+
+## ¿Qué identifiqué?
+
+Particle Es una clase abstracta, todas las partículas deben poder tener update(), draw(), decir si están muertas (isDead()) y, en el caso de las que suben, indicar si deben explotar (shouldExplode()).
+
+RisingParticle es la chispa que se va agrandando. Nace en la parte de abajo de la pantalla, con una velocidad que la impulsa hacia arriba., su movimiento se va frenando por la gravedad y al llegar a una altura se flaggea que ya puede explotar
+
+Clases de explosión: (CircularExplosion, RandomExplosion, StarExplosion)
+
+Cuando una RisingParticle explota, genera entre 20 y 30 partículas de explosión.
+- CircularExplosion -> dibuja círculo
+- RandomExplosion -> dibuja rectángulos
+- StarExplosion -> dibuja líneas que forman una estrellita
+
+- Con click -> crea una chispa que sube (RisingParticle).
+- Con espacio -> crea 1000 partículas como de la nada
+- Con tecla s -> guarda una captura de pantalla.
+
+# Actividad 3
+
+## dep
+
+
+# Actividad 4
+
+Hipótesis
+
+publicVar se puede modificar sin problema.
+protectedVar y privateVar no deberían poder modificarse directamente desde main().
+El compilador debería lanzar un error de acceso.
+
+Conclusión
+El encapsulamiento funciona en tiempo de compilación: el compilador impide que un código externo acceda a variables privadas o protegidas.
+
+
+Hipótesis
+El compilador no permitirá el acceso a obj.secret1 porque es private.
+
+Observación
+Efectivamente da un error:
+error: 'int MyClass::secret1' is private within this context
+
+Conclusión
+Otra vez el encapsulamiento protege en tiempo de compilación.
+
+
+Hipótesis
+Aunque secret1, secret2 y secret3 son privados, el reinterpret_cast nos deja entrar a la memoria de obj y leerlos directamente.
+
+Observación
+El programa compila y ejecuta sin errores.
+
+
+Conclusión
+El encapsulamiento NO es una barrera real en tiempo de ejecución.
+En C++, un objeto es un bloque de memoria contiguo y usando punteros puedes saltarte las restricciones.
+Lo que hace el compilador es protegerte en el código fuente, no blindar físicamente la memoria.
+
+¿Qué es el encapsulamiento?
+El encapsulamiento es ocultar los atributos internos de una clase y exponer solo lo necesario a al instanciar con publics, privates y protecteds.
+
+¿Por qué es importante?
+Permite proteger los datos de modificaciones accidentales.
+Asegura que el objeto solo se use de la forma que el programador diseñó.
+Facilita el mantenimiento y la reutilización del código.
+
+
+# Actividad 5 (Provisional)
+
+
+
+CircularExplosion en memoria
+
+Al inspeccionar el objeto CircularExplosion en el depurador se observa que:
+El objeto contiene los campos heredados de Particle, luego los campos añadidos por ExplosionParticle, y finalmente los propios de CircularExplosion.
+En la ventana Locals/Autos se refleja la jerarquía de clases expandida en árbol, y en Memory se ve como un bloque contiguo de direcciones.
+El primer campo corresponde al puntero a la vtable, lo que confirma el soporte de métodos virtuales.
+Conclusión: la herencia se materializa en memoria como un único bloque que concatena los miembros de las clases base y de la clase derivada, manteniendo el orden de la jerarquía.
+
+¿Cómo se implementa la herencia en C++?
+Herencia simple: el compilador organiza la memoria de la clase derivada colocando primero los miembros de la clase base y luego los nuevos de la derivada.
+Si existen métodos virtuales, se añade un puntero oculto a la _vtable que permite el polimorfismo.
+Gracias a esta organización, un objeto derivado puede ser tratado como su clase base, porque la parte de la base siempre está al inicio del bloque de memoria.
+
+Experimento de herencia múltiple
+
+Ejemplo:
+
+#include <iostream>
+using namespace std;
+
+class A { public: int a; A() : a(1) {} };
+class B { public: int b; B() : b(2) {} };
+class C : public A, public B { public: int c; C() : c(3) {} };
+
+int main() {
+    C obj;
+    cout << obj.a << ", " << obj.b << ", " << obj.c << endl;
+    return 0;
+}
+
+
+🔎 En el depurador:
+
+El objeto obj aparece dividido en bloques: primero la parte de A, luego la parte de B, y finalmente los campos propios de C.
+En memoria se ve como la concatenación de las estructuras de A, B y C.
+
+Conclusión: en C++ la herencia múltiple se implementa agregando cada clase base como una sección distinta dentro del mismo objeto. Esto permite combinar varias jerarquías, aunque puede producir ambigüedades (por ejemplo, el problema del diamante), que se resuelven con herencia virtual.
