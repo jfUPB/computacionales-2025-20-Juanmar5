@@ -26,7 +26,7 @@ Es curioso que el código no pregunta qué tipo es cada partícula, simplemente 
 
 Aquí comprobé con ejemplos en C++ que el encapsulamiento realmente es una protección en tiempo de compilación. Con punteros puedes saltarte esa barrera y leer atributos privados. Eso me hizo reflexionar que encapsular no es blindar físicamente la memoria, sino imponer reglas en el nivel del código para que los programadores usen las clases como deben.
 
-#### Actividad 5: herencia en memoria
+#### Actividad 5
 
 Explorando con el depurador objetos como CircularExplosion vi:
 - La memoria se organiza en bloques contiguos: primero lo heredado de Particle, luego lo de ExplosionParticle, y al final lo propio de CircularExplosion.
