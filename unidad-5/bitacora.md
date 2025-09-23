@@ -1,15 +1,37 @@
 # Bitácora de aprendizaje de la unidad 5
 
 ## 1.  **Diagnóstico inicial**
-- Estoy medio olvidado y perdido con todos los temas de POO
-- Creo que voy mejorando con los temas pero me confundo aún, igual, identifico mejor el polimorfismo y la encapsulación, me cuesta menos distinguirla
+Al empezar esta unidad me sentía medio perdido con POO. Sabía que ya había visto temas como encapsulamiento, herencia y polimorfismo, pero se me mezclaban y a veces no lograba diferenciarlos bien. Con el repaso me fui dando cuenta de que los reconozco mejor: ya distingo que el encapsulamiento es como una barrera de acceso, y que el polimorfismo no es simplemente “heredar”, sino que realmente permite que un mismo método se comporte distinto según el objeto.
 
 ## 2.  **La pregunta inicial**
-- ¿Cómo podré recordar los conceptos de herencia y polimorfismo para volverlos a aplicar al nuevo contexto?
+¿Cómo puedo recordar y aplicar de nuevo herencia y polimorfismo en un contexto nuevo (openFrameworks) y no quedarme solo en la definición que tenía antes de comenzar aquí, o sea, la de hace un año?
 
 ## 3.  **Registro de exploración:** 
-- Aquí documentas cada ciclo de pregunta -> hipótesis -> experimento -> hallazgo -> reflexión.
-- Debe ser rico en evidencia visual (código, capturas del depurador con anotaciones, diagramas).
+#### Actividad 1
+Me puse a repasar los tres pilares: encapsulamiento, herencia y polimorfismo.
+- Encapsulamiento: lo entendí como “ponerle puertas” a los atributos. Recordé un ejemplo que hice con productos de supermercado: algunos datos se podían cambiar con un método, pero no directamente.
+- Herencia: repasé con un ejemplo de Animal y Perro. Ver cómo el perro podía “heredar” comer y dormir, y además ladrar, me dejó claro que la herencia es como extender un molde.
+- Polimorfismo: me gustó pensarlo como un “lenguaje común”: no importa si es un círculo o un rectángulo, ambos entienden el mensaje Dibujar() pero lo ejecutan distinto.
+Ya en este punto empecé a sospechar que había algo interno, tipo tabla o puntero oculto
+
+#### Actividad 2
+Trabajando con el proyecto de partículas entendí mucho mejor el polimorfismo:
+- Particle es abstracta, y todas las demás partículas derivadas deben implementar sus métodos.
+- Cada tipo (RisingParticle, CircularExplosion, etc.) reinterpreta el update() o draw() de forma distinta.
+- Al ejecutar, cuando hago clic o presiono teclas, se crean partículas diferentes, pero en el for se llaman de la misma forma: particles[i]->update(dt);.
+
+Es curioso que el código no pregunta qué tipo es cada partícula, simplemente llama update(), y gracias al polimorfismo cada una responde “a su manera”. El depurador confirma que internamente se está resolviendo dinámicamente.
+
+#### Actividad 3 y 4
+
+Aquí comprobé con ejemplos en C++ que el encapsulamiento realmente es una protección en tiempo de compilación. Con punteros puedes saltarte esa barrera y leer atributos privados. Eso me hizo reflexionar que encapsular no es blindar físicamente la memoria, sino imponer reglas en el nivel del código para que los programadores usen las clases como deben.
+
+#### Actividad 5: herencia en memoria
+
+Explorando con el depurador objetos como CircularExplosion vi:
+- La memoria se organiza en bloques contiguos: primero lo heredado de Particle, luego lo de ExplosionParticle, y al final lo propio de CircularExplosion.
+- Lo primero que aparece es el puntero a la vtable. Eso confirmó mi sospecha inicial: ahí está el truco del polimorfismo.
+- En herencia múltiple, vi que C++ concatena la memoria de cada clase base.
 
 # Actividad 1
 
